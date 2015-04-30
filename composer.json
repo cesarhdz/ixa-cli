@@ -1,0 +1,20 @@
+{
+    "name": "ixa/ixa-cli",
+    "description": "Cli tool for WordPress tasks",
+    "require": {
+        "herrera-io/cli-app": "~2.0"
+    },
+    "require-dev": {
+        "phpspec/phpspec": "^2.2"
+    },
+    "authors": [
+        {
+            "name": "cesarhdz",
+            "email": "cesar@cesarhdz.com"
+        }
+    ],
+    "autoload": {"psr-0": {"": "src"}},
+    "config": {
+        "bin-dir": "bin"
+    }
+}
