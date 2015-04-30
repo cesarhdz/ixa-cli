@@ -3,6 +3,8 @@
 namespace Ixa\Cli;
 
 use Herrera\Cli\Application;
+use Symfony\Component\Console\Input\ArgvInput;
+use Symfony\Component\Console\Output\ConsoleOutput;
 
 class App extends Application
 {
@@ -12,7 +14,6 @@ class App extends Application
 
 
 	function __construct($args = []){
-
 		$args['app.name'] = App::NAME;
 		$args['app.version'] = App::VERSION;
 
@@ -22,5 +23,9 @@ class App extends Application
 
 		// Register Dependencies
         $this['wp.bootstrap'] = new BootstrapService(getcwd());
+
+
+        // Register Commands
+        $this['db:export'] = new DbExportCommand();
 	}
 }
