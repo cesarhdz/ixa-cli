@@ -2,6 +2,8 @@
 
 namespace Ixa\Cli;
 
-class App
+use Herrera\Cli\Application;
+
+class App extends Application
 {
 }
