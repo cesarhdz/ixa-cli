@@ -1,0 +1,12 @@
+#!/usr/bin/env php
+<?php
+
+namespace Ixa\Cli;
+
+// Require autoload
+require  dirname(__FILE__)  . '/../vendor/autoload.php';
+
+$app = new App();
+
+
+$app->run();
