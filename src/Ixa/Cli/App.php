@@ -16,7 +16,11 @@ class App extends Application
 		$args['app.name'] = App::NAME;
 		$args['app.version'] = App::VERSION;
 
+		// Construct
 		parent::__construct($args);
-	}
 
+
+		// Register Dependencies
+        $this['wp.bootstrap'] = new BootstrapService(getcwd());
+	}
 }

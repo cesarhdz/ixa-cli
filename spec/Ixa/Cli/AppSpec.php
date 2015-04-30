@@ -16,5 +16,8 @@ class AppSpec extends ObjectBehavior
 
         $this['app.name']->shouldBe('ixa-cli');
         $this['app.version']->shouldBe(App::VERSION);
+
+    	// expect
+    	$this['wp.bootstrap']->shouldImplement('Ixa\Cli\BootstrapService');
     }
 }
