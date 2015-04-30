@@ -4,7 +4,8 @@
     "require": {
         "herrera-io/cli-app": "~2.0",
         "mikey179/vfsStream": "^1.5",
-        "symfony/yaml": "^2.6"
+        "symfony/yaml": "^2.6",
+        "rah/danpu": "2.6.*"
     },
     "require-dev": {
         "phpspec/phpspec": "^2.2"

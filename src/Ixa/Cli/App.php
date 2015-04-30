@@ -20,12 +20,14 @@ class App extends Application
 		// Construct
 		parent::__construct($args);
 
-
 		// Register Dependencies
-        $this['wp.bootstrap'] = new BootstrapService(getcwd());
+        $this['ixa.bootstrap'] = new BootstrapService(getcwd());
+        $this['ixa.dbService'] = new DbService();
 
 
         // Register Commands
-        $this['db:export'] = new DbExportCommand();
+        $this['db:export'] = function ($c) {
+    		return new DbExportCommand($c['ixa.dbService']);
+		};
 	}
 }

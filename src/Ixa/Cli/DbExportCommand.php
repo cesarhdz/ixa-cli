@@ -8,40 +8,53 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
+
 class DbExportCommand extends Command
 {
+    protected $dbService;
+
+    function __construct(DbService $dbService){
+        $this->dbService = $dbService;
+
+        parent::__construct();
+    }
+
 	protected function configure()
     {
-        $this
-            ->setName('demo:greet')
-            ->setDescription('Greet someone')
-            ->addArgument(
-                'name',
+        $this->setName('db:export')
+             ->setDescription('Export current database')
+             ->addArgument(
+                'file',
                 InputArgument::OPTIONAL,
-                'Who do you want to greet?'
-            )
-            ->addOption(
-               'yell',
-               null,
-               InputOption::VALUE_NONE,
-               'If set, the task will yell in uppercase letters'
-            )
-        ;
+                'Location of the sql file'
+            );
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $name = $input->getArgument('name');
-        if ($name) {
-            $text = 'Hello '.$name;
-        } else {
-            $text = 'Hello';
-        }
+    	$app = $this->getApp();
 
-        if ($input->getOption('yell')) {
-            $text = strtoupper($text);
-        }
+    	$config = $app['ixa.bootstrap']->loadConfig();
+        $file = $input->getArgument('file') ?: 'backup.sql';
 
-        $output->writeln($text);
+     	$output->writeln('Exporting Database ['. $config['parameters']['db_name'] .'] ...');
+
+        try {
+        
+            $result = $this->dbService->export($config['parameters'], $file, '/tmp');
+        
+        } catch (\Exception $e) {
+            $output->writeln('Export failed with message: ' . $e->getMessage());
+            return;
+        }
+        
+		$output->writeln('Exported successfully to [' . $file . ']');
+
+        return $file;
+    }
+
+
+    protected function getApp(){
+    	return  $this->getHelperSet()->get('app');
     }
 }

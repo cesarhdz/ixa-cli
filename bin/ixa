@@ -8,5 +8,6 @@ require  dirname(__FILE__)  . '/../vendor/autoload.php';
 
 $app = new App();
 
+$app['console']->add($app['db:export']);
 
 $app->run();

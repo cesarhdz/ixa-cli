@@ -7,6 +7,11 @@ use Prophecy\Argument;
 
 class DbExportCommandSpec extends ObjectBehavior
 {
+
+	function let(\Ixa\Cli\DbService $service){
+		$this->beConstructedWith($service);
+	}
+
     function it_is_initializable()
     {
         $this->shouldHaveType('Ixa\Cli\DbExportCommand');
